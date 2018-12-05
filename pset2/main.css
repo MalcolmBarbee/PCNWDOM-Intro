@@ -6,6 +6,7 @@ body {
 
 .title-background {
   background-color: transparent;
+  padding-bottom: 0;
 }
 
 .song-name {
@@ -20,4 +21,17 @@ body {
 
 .row:hover {
   background-color: #383838;
+}
+
+input{
+  background-color: transparent;
+  color: 666666;
+  border-radius: 5px;
+}
+
+input:hover{
+  background-color: #383838;
+}
+.jumbotron {
+  margin-bottom: 1rem;
 }

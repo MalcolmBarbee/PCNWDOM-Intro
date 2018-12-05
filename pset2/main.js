@@ -1,8 +1,7 @@
 const playlist = {
   name: 'United States Top 10',
   description: 'The top songs in the US right now.',
-  songs: [
-    {
+  songs: [{
       name: 'thank u, next',
       artists: ['Ariana Grande'],
       image: 'https://i.scdn.co/image/3492042deca1ed9a02e6d46ebe58807bbf8d2a51'
@@ -69,3 +68,71 @@ const playlist = {
     }
   ]
 };
+
+
+
+const objectToHTML = (song) => {
+  return `<div class='row mb-2'>
+  <div class='col-1'>
+    <img src="${song.image}" class="rounded" style='width: 50px; height: 50px;'>
+  </div>
+  <div class='col-11'>
+    <p class='mb-0 mt-1 song-name'>${song.name}</p>
+    <p class='my-0 song-artists'>${song.artists}</p>
+  </div>
+</div>`;
+}
+
+const render = (matchedSongs) => {
+
+  let combinedHTML = ''
+
+  const title = document.querySelector("h1");
+  title.innerText = matchedSongs.name
+
+  const desc = document.querySelector(".lead");
+  desc.innerText = matchedSongs.description
+
+  for (let i = 0; i < matchedSongs.songs.length; i++) {
+    combinedHTML += objectToHTML(matchedSongs.songs[i]);
+  }
+
+  const song_list = document.querySelector(".song-list");
+
+  song_list.innerHTML = combinedHTML;
+  console.log(song_list.innerHTML);
+
+
+}
+
+render(playlist)
+
+const input = document.querySelector(".js-selector")
+
+
+
+const newPlaylist = {
+  name: 'United States Top 10',
+  description: 'The top songs in the US right now.',
+}
+
+input.addEventListener('keyup', e => {
+  let newList = []
+
+  for (let i = 0; i < playlist.songs.length; i++) {
+
+    const lowerName = playlist.songs[i].name.toLowerCase()
+    const lowerValue = input.value.toLowerCase()
+    console.log(lowerValue)
+
+    if (lowerName.includes(lowerValue)) {
+      newList.push(playlist.songs[i])
+    }
+
+  }
+
+  newPlaylist.songs = newList
+
+  render(newPlaylist)
+
+})
